@@ -45,17 +45,17 @@ router.get("/:id", authMiddleware, async (req, res) => {
  */
 router.post("/", authMiddleware, async (req, res) => {
   try {
-    const { name, city } = req.body;
-    if (!name || !city) {
+    const { name, city, railways } = req.body;
+    if (!name || !city ) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const existingStation = await Station.findOne({ name, city });
+    const existingStation = await Station.findOne({ name, city, railways });
     if (existingStation) {
       return res.status(400).json({ message: "Station already exists" });
     }
 
-    const newStation = new Station({ name, city });
+    const newStation = new Station({ name, city, railways });
     const savedStation = await newStation.save();
     res.status(201).json(savedStation);
   } catch (err) {
@@ -80,7 +80,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
     const updatedStation = await Station.findByIdAndUpdate(
       req.params.id,
       { name, city },
-      { new: true }
+      { new: true, useFindAndModify: false }
     );
     if (!updatedStation) {
       return res.status(404).json({ message: "Station not found" });

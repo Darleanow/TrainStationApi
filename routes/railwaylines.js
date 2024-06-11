@@ -10,7 +10,7 @@ const authMiddleware = require("../middleware/authMiddleware");
  */
 router.post("/", authMiddleware, async (req, res) => {
   try {
-    const { name, stations } = req.body;
+    const { name } = req.body;
 
     // Check if name is provided
     if (!name) {
@@ -18,7 +18,7 @@ router.post("/", authMiddleware, async (req, res) => {
     }
 
     // Create and save the new railway line
-    const newRailWayLine = new RailWayLine({ name, stations });
+    const newRailWayLine = new RailWayLine({ name });
     const savedRailWayLine = await newRailWayLine.save();
     res.status(201).json(savedRailWayLine);
   } catch (err) {
