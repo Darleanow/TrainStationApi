@@ -4,25 +4,64 @@ const City = require("../models/City");
 const authMiddleware = require("../middleware/authMiddleware");
 
 /**
- * @route   GET /cities
- * @desc    Get all cities
- * @access  Private (requires authentication)
+ * @swagger
+ * /city:
+ *   get:
+ *     summary: Get all Cities
+ *     description: Retrieve a list of all Cities.
+ *     tags: [City]
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: A list of Cities.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/City'
+ *       '500':
+ *         description: Failed to fetch Cities
  */
 router.get("/", authMiddleware, async (req, res) => {
-  try {
-    const cities = await City.find();
-    res.json(cities);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Failed to fetch cities", error: err.message });
-  }
-});
+    try {
+      const cities = await City.find();
+      res.json(cities);
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Failed to fetch cities", error: err.message });
+    }
+  });
 
 /**
- * @route   GET /cities/:id
- * @desc    Get a specific city by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /city/{id}:
+ *   get:
+ *     summary: Get a specific city by ID
+ *     description: Retrieve a city by its ID.
+ *     tags: [City]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the city to retrieve
+ *     responses:
+ *       '200':
+ *         description: City found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/City'
+ *       '404':
+ *         description: City not found
+ *       '500':
+ *         description: Failed to fetch city
  */
 router.get("/:id", authMiddleware, async (req, res) => {
   try {
@@ -39,9 +78,27 @@ router.get("/:id", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   POST /cities
- * @desc    Add a new city
- * @access  Private (requires authentication)
+ * @swagger
+ * /city:
+ *   post:
+ *     summary: Add a new city
+ *     description: Add a new city.
+ *     tags: [City]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CityInput'
+ *     responses:
+ *       '201':
+ *         description: City added successfully
+ *       '400':
+ *         description: Missing required fields
+ *       '500':
+ *         description: Failed to add city
  */
 router.post("/", authMiddleware, async (req, res) => {
   try {
@@ -60,9 +117,36 @@ router.post("/", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   PUT /cities/:id
- * @desc    Update a city by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /city/{id}:
+ *   put:
+ *     summary: Update a city by ID
+ *     description: Update a city by its ID.
+ *     tags: [City]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the city to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/CityInput'
+ *     responses:
+ *       '200':
+ *         description: City updated successfully
+ *       '400':
+ *         description: Missing required fields
+ *       '404':
+ *         description: City not found
+ *       '500':
+ *         description: Failed to update city
  */
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
@@ -89,9 +173,28 @@ router.put("/:id", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   DELETE /cities/:id
- * @desc    Delete a city by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /city/{id}:
+ *   delete:
+ *     summary: Delete a city by ID
+ *     description: Delete a city by its ID.
+ *     tags: [City]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the city to delete
+ *     responses:
+ *       '200':
+ *         description: City deleted successfully
+ *       '404':
+ *         description: City not found
+ *       '500':
+ *         description: Failed to delete city
  */
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {

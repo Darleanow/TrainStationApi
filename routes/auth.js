@@ -5,9 +5,33 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 /**
- * @route   POST /auth/register
- * @desc    Register a new user
- * @access  Public
+ * @swagger
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     description: Register a new user with a unique username and hashed password.
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: Unique username for the user.
+ *               password:
+ *                 type: string
+ *                 description: User's password.
+ *     responses:
+ *       '201':
+ *         description: User registered successfully
+ *       '500':
+ *         description: Registration failed
  */
 router.post("/register", async (req, res) => {
   try {
@@ -22,9 +46,43 @@ router.post("/register", async (req, res) => {
 });
 
 /**
- * @route   POST /auth/login
- * @desc    Authenticate user and generate JWT token
- * @access  Public
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: Authenticate user and generate JWT token
+ *     description: Authenticate user with username and password, and generate a JWT token for authorization.
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - username
+ *               - password
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: User's username
+ *               password:
+ *                 type: string
+ *                 description: User's password
+ *     responses:
+ *       '200':
+ *         description: Authentication successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: JWT token for authentication
+ *       '401':
+ *         description: Authentication failed
+ *       '500':
+ *         description: Login failed
  */
 router.post("/login", async (req, res) => {
   try {

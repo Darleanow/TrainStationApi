@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+const { swaggerSpec, swaggerUi } = require("./swagger");
+
 require("dotenv").config();
 
 const app = express();
@@ -19,6 +21,10 @@ app.use("/auth", authRoutes);
 app.use("/city", cityRoutes);
 app.use("/stations", stationRoutes);
 app.use("/railwaylines", railwayLineRoutes);
+
+// Serve Swagger documentation
+app.use("/api-docs", swaggerUi.serve);
+app.get("/api-docs", swaggerUi.setup(swaggerSpec));
 
 // Database connection
 mongoose

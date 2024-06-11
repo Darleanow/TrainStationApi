@@ -1,12 +1,67 @@
 const express = require("express");
 const router = express.Router();
-const RailWayLine = require("../models/RailWayLine");
+const RailwayLine = require("../models/RailwayLine");
 const authMiddleware = require("../middleware/authMiddleware");
 
 /**
- * @route   POST /railway-line
- * @desc    Create a new railway line
- * @access  Private (requires authentication)
+ * @swagger
+ * /railwaylines:
+ *   get:
+ *     summary: Get all railway lines
+ *     description: Retrieve a list of all railway lines.
+ *     tags: [Railway Line]
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: A list of railway lines.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/RailwayLine'
+ *       '500':
+ *         description: Failed to fetch railway lines
+ */
+router.get("/", authMiddleware, async (req, res) => {
+  try {
+    const railwayLines = await RailwayLine.find();
+    res.json(railwayLines);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch railway lines", error: err.message });
+  }
+});
+
+/**
+ * @swagger
+ * /railwaylines:
+ *   post:
+ *     summary: Create a new railway line
+ *     description: Create a new railway line.
+ *     tags: [Railway Line]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *             required:
+ *               - name
+ *     responses:
+ *       '201':
+ *         description: Railway line created successfully
+ *       '400':
+ *         description: Missing required fields
+ *       '500':
+ *         description: Failed to create railway line
  */
 router.post("/", authMiddleware, async (req, res) => {
   try {
@@ -18,9 +73,9 @@ router.post("/", authMiddleware, async (req, res) => {
     }
 
     // Create and save the new railway line
-    const newRailWayLine = new RailWayLine({ name });
-    const savedRailWayLine = await newRailWayLine.save();
-    res.status(201).json(savedRailWayLine);
+    const newRailwayLine = new RailwayLine({ name });
+    const savedRailwayLine = await newRailwayLine.save();
+    res.status(201).json(savedRailwayLine);
   } catch (err) {
     res
       .status(500)
@@ -29,33 +84,40 @@ router.post("/", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   GET /railway-line
- * @desc    Get all railway lines
- * @access  Private (requires authentication)
- */
-router.get("/", authMiddleware, async (req, res) => {
-  try {
-    const railWayLines = await RailWayLine.find();
-    res.json(railWayLines);
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Failed to fetch railway lines", error: err.message });
-  }
-});
-
-/**
- * @route   GET /railway-line/:id
- * @desc    Get a specific railway line by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /railwaylines/{id}:
+ *   get:
+ *     summary: Get a specific railway line by ID
+ *     description: Retrieve a railway line by its ID.
+ *     tags: [Railway Line]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the railway line to retrieve
+ *     responses:
+ *       '200':
+ *         description: Railway line found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/RailwayLine'
+ *       '404':
+ *         description: Railway line not found
+ *       '500':
+ *         description: Failed to fetch railway line
  */
 router.get("/:id", authMiddleware, async (req, res) => {
   try {
-    const railWayLine = await RailWayLine.findById(req.params.id);
-    if (!railWayLine) {
-      return res.status(404).json({ message: "Railway Line not found" });
+    const railwayLine = await RailwayLine.findById(req.params.id);
+    if (!railwayLine) {
+      return res.status(404).json({ message: "Railway line not found" });
     }
-    res.json(railWayLine);
+    res.json(railwayLine);
   } catch (err) {
     res
       .status(500)
@@ -64,9 +126,45 @@ router.get("/:id", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   PUT /railway-line/:id
- * @desc    Update a railway line by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /railwaylines/{id}:
+ *   put:
+ *     summary: Update a railway line by ID
+ *     description: Update a railway line by its ID.
+ *     tags: [Railway Line]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the railway line to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               stations:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *             required:
+ *               - name
+ *     responses:
+ *       '200':
+ *         description: Railway line updated successfully
+ *       '400':
+ *         description: Missing required fields
+ *       '404':
+ *         description: Railway line not found
+ *       '500':
+ *         description: Failed to update railway line
  */
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
@@ -77,15 +175,15 @@ router.put("/:id", authMiddleware, async (req, res) => {
       return res.status(400).json({ message: "Name is required" });
     }
 
-    const updatedRailWayLine = await RailWayLine.findByIdAndUpdate(
+    const updatedRailwayLine = await RailwayLine.findByIdAndUpdate(
       req.params.id,
       { name, stations },
       { new: true }
     );
-    if (!updatedRailWayLine) {
-      return res.status(404).json({ message: "Railway Line not found" });
+    if (!updatedRailwayLine) {
+      return res.status(404).json({ message: "Railway line not found" });
     }
-    res.json(updatedRailWayLine);
+    res.json(updatedRailwayLine);
   } catch (err) {
     res
       .status(500)
@@ -94,21 +192,40 @@ router.put("/:id", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   DELETE /railway-line/:id
- * @desc    Delete a railway line by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /railwaylines/{id}:
+ *   delete:
+ *     summary: Delete a railway line by ID
+ *     description: Delete a railway line by its ID.
+ *     tags: [Railway Line]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the railway line to delete
+ *     responses:
+ *       '200':
+ *         description: Railway line deleted successfully
+ *       '404':
+ *         description: Railway line not found
+ *       '500':
+ *         description: Failed to delete railway line
  */
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
-    const deletedRailWayLine = await RailWayLine.findByIdAndDelete(
+    const deletedRailwayLine = await RailwayLine.findByIdAndDelete(
       req.params.id
     );
-    if (!deletedRailWayLine) {
-      return res.status(404).json({ message: "Railway Line not found" });
+    if (!deletedRailwayLine) {
+      return res.status(404).json({ message: "Railway line not found" });
     }
     res.json({
-      message: "Railway Line deleted successfully",
-      deletedRailWayLine,
+      message: "Railway line deleted successfully",
+      deletedRailwayLine,
     });
   } catch (err) {
     res

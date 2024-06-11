@@ -4,9 +4,32 @@ const Station = require("../models/Station");
 const authMiddleware = require("../middleware/authMiddleware");
 
 /**
- * @route   GET /stations
- * @desc    Get all stations
- * @access  Private (requires authentication)
+ * @swagger
+ * tags:
+ *   name: Stations
+ *   description: API endpoints for managing stations
+ */
+
+/**
+ * @swagger
+ * /stations:
+ *   get:
+ *     summary: Get all stations
+ *     description: Retrieve a list of all stations.
+ *     tags: [Stations]
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       '200':
+ *         description: A list of stations.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Station'
+ *       '500':
+ *         description: Failed to fetch stations
  */
 router.get("/", authMiddleware, async (req, res) => {
   try {
@@ -20,9 +43,32 @@ router.get("/", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   GET /stations/:id
- * @desc    Get a specific station by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /stations/{id}:
+ *   get:
+ *     summary: Get a specific station by ID
+ *     description: Retrieve a station by its ID.
+ *     tags: [Stations]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the station to retrieve
+ *     responses:
+ *       '200':
+ *         description: Station found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Station'
+ *       '404':
+ *         description: Station not found
+ *       '500':
+ *         description: Failed to fetch station
  */
 router.get("/:id", authMiddleware, async (req, res) => {
   try {
@@ -39,23 +85,41 @@ router.get("/:id", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   POST /stations
- * @desc    Add a new station
- * @access  Private (requires authentication)
+ * @swagger
+ * /stations:
+ *   post:
+ *     summary: Add a new station
+ *     description: Add a new station.
+ *     tags: [Stations]
+ *     security:
+ *       - BearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/StationInput'
+ *     responses:
+ *       '201':
+ *         description: Station added successfully
+ *       '400':
+ *         description: Missing required fields
+ *       '500':
+ *         description: Failed to add station
  */
 router.post("/", authMiddleware, async (req, res) => {
   try {
-    const { name, city, railways } = req.body;
-    if (!name || !city ) {
+    const { name, city } = req.body;
+    if (!name || !city) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const existingStation = await Station.findOne({ name, city, railways });
+    const existingStation = await Station.findOne({ name, city });
     if (existingStation) {
       return res.status(400).json({ message: "Station already exists" });
     }
 
-    const newStation = new Station({ name, city, railways });
+    const newStation = new Station({ name, city });
     const savedStation = await newStation.save();
     res.status(201).json(savedStation);
   } catch (err) {
@@ -66,9 +130,36 @@ router.post("/", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   PUT /stations/:id
- * @desc    Update a station by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /stations/{id}:
+ *   put:
+ *     summary: Update a station by ID
+ *     description: Update a station by its ID.
+ *     tags: [Stations]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the station to update
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/StationInput'
+ *     responses:
+ *       '200':
+ *         description: Station updated successfully
+ *       '400':
+ *         description: Missing required fields
+ *       '404':
+ *         description: Station not found
+ *       '500':
+ *         description: Failed to update station
  */
 router.put("/:id", authMiddleware, async (req, res) => {
   try {
@@ -94,9 +185,28 @@ router.put("/:id", authMiddleware, async (req, res) => {
 });
 
 /**
- * @route   DELETE /stations/:id
- * @desc    Delete a station by ID
- * @access  Private (requires authentication)
+ * @swagger
+ * /stations/{id}:
+ *   delete:
+ *     summary: Delete a station by ID
+ *     description: Delete a station by its ID.
+ *     tags: [Stations]
+ *     security:
+ *       - BearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID of the station to delete
+ *     responses:
+ *       '200':
+ *         description: Station deleted successfully
+ *       '404':
+ *         description: Station not found
+ *       '500':
+ *         description: Failed to delete station
  */
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
