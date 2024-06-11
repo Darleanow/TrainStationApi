@@ -1,0 +1,344 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "TrainStation",
+    "collectionId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+    "dateExported": "2024-06-11T10:13:33.975Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "f1ff974b-3790-4fa8-99c1-a635be0a5c37",
+            "name": "Authentification",
+            "containerId": "",
+            "created": "2024-06-11T09:41:37.858Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "8d9ea44a-5763-46e0-93e0-890018e6517b",
+            "name": "City",
+            "containerId": "",
+            "created": "2024-06-11T09:42:30.309Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "734d323d-188a-475b-96eb-c187a3d8860a",
+            "name": "RailWays",
+            "containerId": "",
+            "created": "2024-06-11T10:00:24.824Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "e959347a-2b99-4ce9-9806-ccbefba88072",
+            "name": "Stations",
+            "containerId": "",
+            "created": "2024-06-11T10:08:17.007Z",
+            "sortNum": 50000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "9527a7f7-5fab-4e31-afdb-14f60dbd8ec2",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "f1ff974b-3790-4fa8-99c1-a635be0a5c37",
+            "name": "RegisterCheck",
+            "url": "http://localhost:3000/auth/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-06-11T09:20:59.245Z",
+            "modified": "2024-06-11T09:39:59.987Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"test\",\n  \"password\": \"password\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "73e8324a-772e-447d-a49f-9988c9971602",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "f1ff974b-3790-4fa8-99c1-a635be0a5c37",
+            "name": "LoginCheck",
+            "url": "http://localhost:3000/auth/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-06-11T09:40:20.773Z",
+            "modified": "2024-06-11T09:41:25.400Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"test\",\n  \"password\": \"password\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "54519aa3-e0be-4387-a3d9-cf4a75a254df",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "8d9ea44a-5763-46e0-93e0-890018e6517b",
+            "name": "GetAllCitiesCheck",
+            "url": "http://localhost:3000/city/",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-06-11T09:42:47.941Z",
+            "modified": "2024-06-11T09:48:06.226Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "88aba30b-270f-4b7f-ba61-9cff9aff97c2",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "8d9ea44a-5763-46e0-93e0-890018e6517b",
+            "name": "AddCityCheck",
+            "url": "http://localhost:3000/city/",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-06-11T09:44:00.122Z",
+            "modified": "2024-06-11T09:44:56.827Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Lyon\",\n  \"country\": \"France\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "06b5dfb4-8ab2-42d2-99da-4b6536941dbe",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "8d9ea44a-5763-46e0-93e0-890018e6517b",
+            "name": "GetCityByIdCheck",
+            "url": "http://localhost:3000/city/6668107768ec91827879a505",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-06-11T09:45:08.345Z",
+            "modified": "2024-06-11T09:45:29.993Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "f088e075-e2e1-46dd-90be-428e1eac3bb0",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "8d9ea44a-5763-46e0-93e0-890018e6517b",
+            "name": "UpdateCityCheck",
+            "url": "http://localhost:3000/city/66681c98c21bd16dc0ed8e5b",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-06-11T09:45:56.874Z",
+            "modified": "2024-06-11T09:47:03.043Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Paris\",\n  \"country\": \"France\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "41d5728e-327d-44a5-95d0-dfa20e743df3",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "8d9ea44a-5763-46e0-93e0-890018e6517b",
+            "name": "DeleteCityCheck",
+            "url": "http://localhost:3000/city/66681c98c21bd16dc0ed8e5b",
+            "method": "DELETE",
+            "sortNum": 70000,
+            "created": "2024-06-11T09:47:20.567Z",
+            "modified": "2024-06-11T09:47:38.709Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "23590277-f4a9-4237-9ce5-9789c7601f5f",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "734d323d-188a-475b-96eb-c187a3d8860a",
+            "name": "GetAllRailwaysCheck",
+            "url": "http://localhost:3000/railwaylines/",
+            "method": "GET",
+            "sortNum": 130000,
+            "created": "2024-06-11T10:00:34.121Z",
+            "modified": "2024-06-11T10:00:46.645Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "50e508ca-50b9-4c0c-bbd9-baad739dc04c",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "734d323d-188a-475b-96eb-c187a3d8860a",
+            "name": "AddRailwayCheck",
+            "url": "http://localhost:3000/railwaylines/",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2024-06-11T10:03:28.693Z",
+            "modified": "2024-06-11T10:07:20.202Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Railway 1\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "dff50b7a-a9ed-4973-9ed9-6050cda3d2f3",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "734d323d-188a-475b-96eb-c187a3d8860a",
+            "name": "GetRailwayByIdCheck",
+            "url": "http://localhost:3000/railwaylines/6668215b7f785277bce28597",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2024-06-11T10:05:51.640Z",
+            "modified": "2024-06-11T10:06:06.331Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "b5712288-4dbe-46b3-a3ee-af5f6b6d32a4",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "734d323d-188a-475b-96eb-c187a3d8860a",
+            "name": "UpdateRailwayCheck",
+            "url": "http://localhost:3000/railwaylines/6668215b7f785277bce28597",
+            "method": "PUT",
+            "sortNum": 180000,
+            "created": "2024-06-11T10:06:16.570Z",
+            "modified": "2024-06-11T10:06:46.406Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Grenoble - Lyon Railway\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "43997dae-fb98-4d11-a92e-d85e44599aed",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "734d323d-188a-475b-96eb-c187a3d8860a",
+            "name": "DeleteRailwayCheck",
+            "url": "http://localhost:3000/railwaylines/666821d87f785277bce2859c",
+            "method": "DELETE",
+            "sortNum": 190000,
+            "created": "2024-06-11T10:06:59.058Z",
+            "modified": "2024-06-11T10:07:56.167Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "2d80d9bd-7c0e-465d-a9ba-da6159cb6934",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "e959347a-2b99-4ce9-9806-ccbefba88072",
+            "name": "GetAllStationsCheck",
+            "url": "http://localhost:3000/stations/",
+            "method": "GET",
+            "sortNum": 200000,
+            "created": "2024-06-11T10:08:26.674Z",
+            "modified": "2024-06-11T10:08:37.656Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "da4cdd63-2d5f-4682-9fcd-c551e586c607",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "e959347a-2b99-4ce9-9806-ccbefba88072",
+            "name": "AddStationCheck",
+            "url": "http://localhost:3000/stations/",
+            "method": "POST",
+            "sortNum": 210000,
+            "created": "2024-06-11T10:08:44.459Z",
+            "modified": "2024-06-11T10:10:26.937Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Gare de Grenoble\",\n  \"city\": \"6668107768ec91827879a505\",\n  \"railways\": \n  [\n    \"6668215b7f785277bce28597\"\n  ]\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "366b2db2-b292-4c48-b64b-707615fefc6d",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "e959347a-2b99-4ce9-9806-ccbefba88072",
+            "name": "GetStationByIdCheck",
+            "url": "http://localhost:3000/stations/666822937f785277bce285a7",
+            "method": "GET",
+            "sortNum": 220000,
+            "created": "2024-06-11T10:10:42.095Z",
+            "modified": "2024-06-11T10:11:08.575Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "a0fde727-749d-4b8e-b297-a4ba43895ef4",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "e959347a-2b99-4ce9-9806-ccbefba88072",
+            "name": "UpdateStationCheck",
+            "url": "http://localhost:3000/stations/666822937f785277bce285a7",
+            "method": "PUT",
+            "sortNum": 230000,
+            "created": "2024-06-11T10:11:16.694Z",
+            "modified": "2024-06-11T10:12:56.016Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Nouvelle Gare de grenoble\",\n  \"city\": \"6668107768ec91827879a505\",\n  \"railways\": \n  [\n    \"6668215b7f785277bce28597\"\n  ]\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        },
+        {
+            "_id": "bacd6163-909b-4bd2-9829-9b35350cdd94",
+            "colId": "cabc7791-42a7-48d3-8be5-bcb213eb00f2",
+            "containerId": "e959347a-2b99-4ce9-9806-ccbefba88072",
+            "name": "DeleteStationCheck",
+            "url": "http://localhost:3000/stations/666822937f785277bce285a7",
+            "method": "DELETE",
+            "sortNum": 240000,
+            "created": "2024-06-11T10:13:09.090Z",
+            "modified": "2024-06-11T10:13:23.017Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjY4MWI3MGMyMWJkMTZkYzBlZDhlNTUiLCJpYXQiOjE3MTgwOTg4ODYsImV4cCI6MTcxODEwMjQ4Nn0.Ce8oAM8Z5WJ146IpXS_F_3dz9oJ3Te5Qgcqm9lfIyXA"
+            }
+        }
+    ],
+    "ref": "Ln1zaFAhZyvRaBwqx45ewmDrZwBFxI29i4FKk7I9bh4wH_lb8K7xIgUIjYom1KyD0SVCFKcWYnNvmA50YxEY5Q"
+}
